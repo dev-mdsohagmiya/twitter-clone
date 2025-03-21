@@ -1,15 +1,16 @@
 import express from "express";
-const router = express.Router();
+import {
+  getMe,
+  login,
+  logout,
+  signup,
+} from "../controllers/auth.controllers.js";
+import { protectRoute } from "../middleware/protectRoute.js";
+const authRouters = express.Router();
 
-router.post("/signup", (req, res) => {
-  res.send("you hit the signup endpoint.");
-});
-router.post("/login", (req, res) => {
-  res.send("you hit the signup endpoint.");
-});
+authRouters.get("/me", protectRoute, getMe);
+authRouters.post("/signup", signup);
+authRouters.post("/login", login);
+authRouters.post("/logout", logout);
 
-router.post("/logout", (req, res) => {
-  res.send("you hit the signup endpoint.");
-});
-
-export default router;
+export default authRouters;
