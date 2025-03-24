@@ -5,6 +5,7 @@ import { connectMongoDB } from "./db/connectMongodb.js";
 import authRouters from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
+import postRouter from "./routes/post.routes.js";
 dotenv.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // to parge form data
 app.use("/api/auth", authRouters);
 app.use("/api/user", userRoutes);
+app.use("/api/post", postRouter);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("server is running...");
